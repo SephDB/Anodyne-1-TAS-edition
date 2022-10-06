@@ -26,9 +26,11 @@ package states
 	public class PlayState  extends FlxState {	
 		
 		public function PlayState() {
+			SOFT_RESET = FlxG.state is PlayState;
 			
 		}
 		
+		private var SOFT_RESET:Boolean;
 		private var BACK_TEXT_MOBILE:FlxBitmapFont;
 		// shaders
 		private var static_shader:Shader = new Shader(new Common_Sprites.static_shader);
@@ -255,7 +257,8 @@ package states
 			// overlay before the FG (for forest)
 			
 			set_before_fg();	
-			state = S_JUST_ENTERED_MAP;
+			state = SOFT_RESET ? S_NORMAL : S_JUST_ENTERED_MAP;
+			SOFT_RESET = false;
 			SWITCH_MAPS = false;
 			cleaned_up_before_exit = false;
 			played_death_sound = false;
@@ -429,14 +432,18 @@ package states
 			
 			black_overlay.scrollFactor = noScrollPt;
 			black_overlay.makeGraphic(Registry.SCREEN_HEIGHT_IN_PIXELS, Registry.HEADER_HEIGHT + Registry.SCREEN_WIDTH_IN_PIXELS, 0xff000000);
-			black_overlay.alpha = 1;
-			if (Registry.FUCK_IT_MODE_ON) {
-				black_overlay.alpha = 0.02;
+			
+			if(state == S_JUST_ENTERED_MAP) {
+				black_overlay.alpha = 1;
+				if (Registry.FUCK_IT_MODE_ON) {
+					black_overlay.alpha = 0.02;
+				}
+				
+				Registry.EVENT_FADE_BEGUN = state == S_JUST_ENTERED_MAP;
 			}
-			
-			/* Graphical effects */
-			
-			Registry.EVENT_FADE_BEGUN = true;
+			else {
+				black_overlay.alpha = 0;
+			}
 			// Decorative overlay
 			load_decoration_overlay_graphic();
 			
