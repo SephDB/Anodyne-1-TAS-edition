@@ -106,6 +106,8 @@ package org.flixel.system
 			while(i < l)
 			{
 				line = lines[i++] as String;
+				if (line.charAt(0) == ';')
+					continue;
 				if(line.length > 3)
 				{
 					_frames[frameCount++] = new FrameRecord().load(line);
@@ -159,7 +161,8 @@ package org.flixel.system
 				frame++;
 				return;
 			}
-			_frames[frameCount++] = new FrameRecord().create(frame++,keysRecord,mouseRecord);
+			_frames[frameCount++] = new FrameRecord().create(frame, keysRecord, mouseRecord);
+			frame = 1;
 			if(frameCount >= _capacity)
 			{
 				_capacity *= 2;
@@ -181,7 +184,7 @@ package org.flixel.system
 			}
 			if((_frames[_marker] as FrameRecord).frame != frame++)
 				return;
-			
+			frame = 1;
 			var fr:FrameRecord = _frames[_marker++];
 			if(fr.keys != null)
 				FlxG.keys.playback(fr.keys);

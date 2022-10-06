@@ -401,19 +401,19 @@ package org.flixel
 		/**
 		 * Load replay data from a string and play it back.
 		 * 
-		 * @param	Data		The replay that you want to load.
-		 * @param	State		Optional parameter: if you recorded a state-specific demo or cutscene, pass a new instance of that state here.
-		 * @param	CancelKeys	Optional parameter: an array of string names of keys (see FlxKeyboard) that can be pressed to cancel the playback, e.g. ["ESCAPE","ENTER"].  Also accepts 2 custom key names: "ANY" and "MOUSE" (fairly self-explanatory I hope!).
-		 * @param	Timeout		Optional parameter: set a time limit for the replay.  CancelKeys will override this if pressed.
-		 * @param	Callback	Optional parameter: if set, called when the replay finishes.  Running to the end, CancelKeys, and Timeout will all trigger Callback(), but only once, and CancelKeys and Timeout will NOT call FlxG.stopReplay() if Callback is set!
+		 * @param	Data			The replay that you want to load.
+		 * @param	StandardMode	If true, reload entire game, else just reload current game state.
+		 * @param	CancelKeys		Optional parameter: an array of string names of keys (see FlxKeyboard) that can be pressed to cancel the playback, e.g. ["ESCAPE","ENTER"].  Also accepts 2 custom key names: "ANY" and "MOUSE" (fairly self-explanatory I hope!).
+		 * @param	Timeout			Optional parameter: set a time limit for the replay.  CancelKeys will override this if pressed.
+		 * @param	Callback		Optional parameter: if set, called when the replay finishes.  Running to the end, CancelKeys, and Timeout will all trigger Callback(), but only once, and CancelKeys and Timeout will NOT call FlxG.stopReplay() if Callback is set!
 		 */
-		static public function loadReplay(Data:String,State:FlxState=null,CancelKeys:Array=null,Timeout:Number=0,Callback:Function=null):void
+		static public function loadReplay(Data:String,StandardMode:Boolean=true,CancelKeys:Array=null,Timeout:Number=0,Callback:Function=null):void
 		{
 			_game._replay.load(Data);
-			if(State == null)
+			if(StandardMode)
 				FlxG.resetGame();
 			else
-				FlxG.switchState(State);
+				FlxG.resetState();
 			_game._replayCancelKeys = CancelKeys;
 			_game._replayTimer = Timeout*1000;
 			_game._replayCallback = Callback;

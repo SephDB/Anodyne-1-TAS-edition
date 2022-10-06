@@ -70,6 +70,7 @@ package org.flixel.system.debug
 		protected var _pressingStep:Boolean;
 		
 		protected var _file:FileReference;
+		protected var _openAlt:Boolean;
 		
 		protected var _runtimeDisplay:TextField;
 		protected var _runtime:uint;
@@ -135,6 +136,7 @@ package org.flixel.system.debug
 			
 			stepRequested = false;
 			_file = null;
+			_openAlt = false;
 
 			unpress();
 			checkOver();
@@ -224,8 +226,9 @@ package org.flixel.system.debug
 		 * Called when the "open file" button is pressed.
 		 * Opens the file dialog and registers event handlers for the file dialog.
 		 */
-		public function onOpen():void
+		public function onOpen(altKey:Boolean):void
 		{
+			_openAlt = altKey;
 			_file = new FileReference();
 			_file.addEventListener(Event.SELECT, onOpenSelect);
 			_file.addEventListener(Event.CANCEL, onOpenCancel);
@@ -271,7 +274,7 @@ package org.flixel.system.debug
 				return;
 			}
 			
-			FlxG.loadReplay(fileContents);
+			FlxG.loadReplay(fileContents,!_openAlt);
 		}
 		
 		/**
@@ -491,7 +494,7 @@ package org.flixel.system.debug
 		protected function onMouseUp(E:MouseEvent=null):void
 		{
 			if(_overOpen && _pressingOpen)
-				onOpen();
+				onOpen(E.altKey);
 			else if(_overRecord && _pressingRecord)
 			{
 				if(_stop.visible)
