@@ -8,15 +8,15 @@
   <compiler>
     <define append="true">
       <name>CONFIG::debug</name>
-      <value>false</value>
-    </define>
-    <define append="true">
-      <name>CONFIG::release</name>
       <value>true</value>
     </define>
     <define append="true">
+      <name>CONFIG::release</name>
+      <value>false</value>
+    </define>
+    <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'4/4/2020'</value>
+      <value>'06/10/2022'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -30,17 +30,15 @@
       <name>CONFIG::desktop</name>
       <value>true</value>
     </define>
-    <optimize>true</optimize>
-    <omit-trace-statements>true</omit-trace-statements>
-    <verbose-stacktraces>false</verbose-stacktraces>
+    <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>C:\Users\hantani\Documents\Anodyne 1 Repo\intra\src</path-element>
+      <path-element>D:\Projects_Seph\Anodyne-1-TAS-edition\intra\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true" />
   </compiler>
   <file-specs>
-    <path-element>C:\Users\hantani\Documents\Anodyne 1 Repo\intra\src\Main.as</path-element>
+    <path-element>D:\Projects_Seph\Anodyne-1-TAS-edition\intra\src\Main.as</path-element>
   </file-specs>
   <default-background-color>#000000</default-background-color>
   <default-frame-rate>30</default-frame-rate>
