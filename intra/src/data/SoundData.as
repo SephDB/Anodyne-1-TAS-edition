@@ -790,7 +790,7 @@ package data
 			if (Registry.GAMESTATE != null) {
 				Registry.GAMESTATE.last_song_time = 0; // avoid issues with changing song midmap
 			}
-			//current_song.volume = FlxG.volume;
+			current_song.volume = FlxG.volume * Registry.volume_scale;
 			current_song.play();
 			
 			if (title == "WINDMILL" && Registry.CUTSCENES_PLAYED[Cutscene.Windmill_Opening] == 0) {

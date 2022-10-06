@@ -141,15 +141,6 @@ package states
 			bg.loadGraphic(S_TITLE_PICTURE, false, false, 160, 180);
 			add(bg);
 			
-			Registry.sound_data = new SoundData();
-		
-			Registry.sound_data.start_song_from_title("TITLE");
-			if (Intra.is_mobile) {
-				Registry.sound_data.current_song.volume = 0;
-				//mobile_message = EventScripts.init_bitmap_font("NOTE\n\nIf you have input\nlag during gameplay,\nreturn to your\nhome screen and\nre-enter Anodyne.\n\nPRESS C TO CONTINUE", "center", 9, 20, null, "apple_white");
-				mobile_message = EventScripts.init_bitmap_font(DH.lk("title",16), "center", 9, 20, null, "apple_white");
-			}
-			
 			btn = new FlxSprite(FlxG.width - 80, FlxG.height - 40);
 			btn.loadGraphic(Button.S_BUTTON, true, false, 16, 16);
 			btn.frame = 2;
@@ -213,7 +204,14 @@ package states
 				Registry.controls = Registry.default_controls;
 				
 			}
-			
+						
+			Registry.sound_data = new SoundData();
+			Registry.sound_data.start_song_from_title("TITLE");
+			if (Intra.is_mobile) {
+				Registry.sound_data.current_song.volume = 0;
+				//mobile_message = EventScripts.init_bitmap_font("NOTE\n\nIf you have input\nlag during gameplay,\nreturn to your\nhome screen and\nre-enter Anodyne.\n\nPRESS C TO CONTINUE", "center", 9, 20, null, "apple_white");
+				mobile_message = EventScripts.init_bitmap_font(DH.lk("title",16), "center", 9, 20, null, "apple_white");
+			}
 			
 			text.color = 0x758d91;
 			version = DH.lk("title", 7) + " 1.55S";
